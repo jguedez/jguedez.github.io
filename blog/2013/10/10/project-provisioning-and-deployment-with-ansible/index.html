@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Project provisioning and deployment with Ansible - Jose Guedez</title>
+  <meta name="author" content="Jose Guedez">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yoursite.com/blog/2013/10/10/project-provisioning-and-deployment-with-ansible">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jose Guedez" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/">Home</a></li>
+    
+        <li ><a href="/blog/archives/">Archives</a></li>
+    
+        <li ><a href="/about.html">About</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/jguedez" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    <li><a href="http://linkedin.com/in/joseguedez" title="Linkedin Profile"><i class="icon-linkedin-sign social-navbar"></i></a></li>
+    
+    
+    <li><a href="http://twitter.com/jfguedez" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Project Provisioning and Deployment With Ansible
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2013-10-10T18:44:30+11:00" pubdate data-updated="true">Oct 10<span>th</span>, 2013</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <h2>deployment is so easy with today&rsquo;s tools that there is simply no excuse&hellip;</h2>
+
+<p>I had been meaning to start using a real configuration management tool and
+leave my Fabric scripts behind for a while. The problem for me was that tools
+like <a href="http://puppetlabs.com/">Puppet</a> or <a href="http://www.opscode.com/chef/">Chef</a>
+seemed like overkill in most of my use cases.</p>
+
+<p>When I first learned about <a href="http://www.saltstack.com/">Salt</a>, the fact that was
+based on <strong>Python</strong> was a big plus and motivated me to give it a closer look
+but still all the overhead needed for simple projects seemed too much (I
+don&rsquo;t manage <em>thousands</em> of servers&hellip;)</p>
+
+<p>Enter <a href="http://www.ansibleworks.com/">Ansible</a> &ndash; it let&rsquo;s you automate
+everything without having to install anything on your server at the beginning &ndash;
+just <strong>SSH</strong> will do! Later as the project scales you can make your
+provisioning and deployment as complex as needed but getting started is easy.
+No big setup at all for simple projects.</p>
+
+<!-- more -->
+
+
+<p>Ansible revolves around the concept of an <strong>Inventory</strong>, that includes all the
+machines that will be managed and <strong>Playbooks</strong>, the list of states that
+describe the final state of the servers in the inventory.</p>
+
+<p>I found this <a href="http://www.stavros.io/posts/example-provisioning-and-deployment-ansible/">excellent article</a>
+about using Ansible on Django projects, even including a special setup for
+local VMs like <a href="http://www.vagrantup.com/">Vagrant</a> &ndash; it even allows for
+different virtualenv requirements.</p>
+
+<p>You basically just specify a couple of yaml files for Ansible to work with and
+you are done:</p>
+
+<ul>
+<li><strong>hosts</strong> &ndash; The inventory file for Ansible, it specifies the ip addresses,
+nicknames, groups and other server designations.</li>
+<li><strong>vars.yaml</strong> &ndash; Includes the project name, target location, packages to be
+installed, etc.</li>
+<li><strong>provision.yaml</strong> &ndash; This playbook that setups a brand new server (install
+base packages, etc.)</li>
+<li><strong>deploy.yaml</strong> &ndash; As the name implies this playbook performs the actual code
+deployment (pull code, update packages, run migrations, etc.)</li>
+<li><strong>handlers.yaml</strong> &ndash; This file specifies the actions to run if one of the
+previous playbooks makes certain changes, for example if the nginx
+configuration changes, the handler will be notified and nginx will be
+restarted.</li>
+</ul>
+
+
+<p>Just for illustration purposes I am copying here one of the yaml files from the blog
+post &ndash; <strong><em>vars.yaml</em></strong></p>
+
+<figure class='code'><figcaption><span>vars.yaml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="nn">---</span>
+</span><span class='line'><span class="l-Scalar-Plain">project_name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">myproject</span>
+</span><span class='line'><span class="l-Scalar-Plain">project_root</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/var/projects/myproject</span>
+</span><span class='line'><span class="l-Scalar-Plain">project_repo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">git@bitbucket.org:myuser/myproject.git</span>
+</span><span class='line'><span class="l-Scalar-Plain">system_packages</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">build-essential</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">libevent-dev</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">nginx</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql-server-dev-all</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python-dev</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python-setuptools</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">redis-server</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postfix</span>
+</span><span class='line'><span class="l-Scalar-Plain">python_packages</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pip</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">virtualenv</span>
+</span><span class='line'><span class="l-Scalar-Plain">initfiles</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gunicorn</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I will stop here but there&rsquo;s more detail on the blog post and much more on
+Ansible&rsquo;s website, there are hundreds of module beyond apt, pip and friends,
+and if you don&rsquo;t find what you need you can extend the system using Python&hellip;</p>
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/ansible/"><span class="badge">ansible</span></a>
+
+  <a href="/blog/categories/deployment/"><span class="badge">deployment</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <div class="addthis_toolbox addthis_default_style ">
+  
+  
+  <a class="addthis_button_tweet"></a>
+  
+  
+  <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2013/09/12/initial-commit/" title="Previous Post: Initial commit...">&laquo; Initial commit...</a>
+          
+          
+            <a class="basic-alignment right" href="/blog/2013/10/25/hy-lisp-syntax-for-python/" title="Next Post: Hy: Lisp syntax for Python">Hy: Lisp syntax for Python &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2013 - Jose Guedez -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

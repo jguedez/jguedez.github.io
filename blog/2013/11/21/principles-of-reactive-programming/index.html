@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Principles of Reactive Programming - Jose Guedez</title>
+  <meta name="author" content="Jose Guedez">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yoursite.com/blog/2013/11/21/principles-of-reactive-programming">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jose Guedez" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/">Home</a></li>
+    
+        <li ><a href="/blog/archives/">Archives</a></li>
+    
+        <li ><a href="/about.html">About</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/jguedez" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    <li><a href="http://linkedin.com/in/joseguedez" title="Linkedin Profile"><i class="icon-linkedin-sign social-navbar"></i></a></li>
+    
+    
+    <li><a href="http://twitter.com/jfguedez" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Principles of Reactive Programming
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2013-11-21T20:55:11+11:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <h2>Odersky&rsquo;s follow-up course on functional programming&hellip;</h2>
+
+<p>I was looking forward to the follow-up course to <a href="https://www.coursera.org/course/progfun">Functional Programming
+Principles in Scala</a>, by Martin
+Odersky, the creator of the <a href="http://www.scala-lang.org/">Scala</a> programming
+language. I took that course about a year ago and even though Scala is not one
+of my favourite programming languages I can safely say that it was excellent and
+I learned a lot.</p>
+
+<p>Finally it&rsquo;s here &ndash; <a href="https://www.coursera.org/course/reactive">Principles of Reactive Programming</a>,
+but it&rsquo;s somewhat different from what I expected when I completed the previous
+course.</p>
+
+<p>The course is being taught this time not just by Odersky, but also by
+<a href="http://en.wikipedia.org/wiki/Erik_Meijer_(computer_scientist)">Erik Meijer</a>
+(of C#/LINQ fame) and by Roland Kuhn, from the Akka team. The course consists of
+three sections, one for each professors &ndash; as you can imagine Odersky is teaching
+a general introduction while Meijer and Kuhn cover more specialized concepts
+like asynchronous computations and actors.</p>
+
+<!-- more -->
+
+
+<p>I have been enjoying it so far. It seems a lot of people are complaining about
+the time requirements and difficulty compared to the previous course. The
+concepts are definitely more advanced this time around (monads&hellip;), and I&rsquo;ve
+limited exposure to them &ndash; while I had some knowledge about FP in general for
+the first course (completing the &ldquo;Little Schemer&rdquo; made me familiar with
+recursion).</p>
+
+<p>I am looking forward to the section about actors (it&rsquo;s the last part), as I have
+heard a lot about it in relation to Erlang and Akka but have never actually
+played with it.</p>
+
+<p>I think I am starting to like Scala more this time around. This might also be
+the result of reading more and more about the benefits of having a type system.
+I think I am starting to get the hang of it after using mainly dynamic languages
+for a long time (Python!). I also think that being exposed to all these different
+paradigms is being beneficial and gives me a better perspective.</p>
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/coursera/"><span class="badge">coursera</span></a>
+
+  <a href="/blog/categories/functional/"><span class="badge">functional</span></a>
+
+  <a href="/blog/categories/scala/"><span class="badge">scala</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <div class="addthis_toolbox addthis_default_style ">
+  
+  
+  <a class="addthis_button_tweet"></a>
+  
+  
+  <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2013/11/05/creating-custom-vagrant-boxes-with-veewee/" title="Previous Post: Creating custom Vagrant boxes with Veewee">&laquo; Creating custom Vagrant boxes with Veewee</a>
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2013 - Jose Guedez -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

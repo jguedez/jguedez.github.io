@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: lisp | Jose Guedez]]></title>
+  <link href="http://yoursite.com/blog/categories/lisp/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2013-12-02T22:40:23+11:00</updated>
+  <id>http://yoursite.com/</id>
+  <author>
+    <name><![CDATA[Jose Guedez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hy: Lisp syntax for Python]]></title>
+    <link href="http://yoursite.com/blog/2013/10/25/hy-lisp-syntax-for-python/"/>
+    <updated>2013-10-25T20:20:05+11:00</updated>
+    <id>http://yoursite.com/blog/2013/10/25/hy-lisp-syntax-for-python</id>
+    <content type="html"><![CDATA[<h2>You got parens in your Python&hellip;</h2>
+
+<p>Every now and then you find a project that is simply <strong>awesome</strong>. I have played
+with <a href="http://clojure.org/">Clojure</a> several times in the past and while I like
+it a lot, the <strong><em>slow</em></strong> start-up of the JVM turns me off.</p>
+
+<p>If I was doing a bigger project the startup time wouldn&rsquo;t be so bad, but I would
+like to start using the language for small stuff first while I get used to it &ndash;
+but we are talking waiting many seconds to have a working repl versus an
+immediate and powerful <a href="http://ipython.org/">IPython</a> prompt.</p>
+
+<p>Enter <a href="http://hylang.org/">Hy</a>, a Lisp that compiles directly to Python ASTs. It
+is completely transparent to invoke Python code from Python and vice versa. It&rsquo;s
+clear that it&rsquo;s heavily inspired by Clojure, and that&rsquo;s a big plus in my book
+(you even get the threading macros!). Best of all it gives you access to write
+your own macros within Python.</p>
+
+<!-- more -->
+
+
+<p>I found out about Hy from a post in <a href="https://news.ycombinator.com/item?id=6700103">Hacker News</a>,
+leading to a <a href="http://try-hy.appspot.com/">online interpreter</a> with an excellent
+presentation.</p>
+
+<p>I think Hy will let me play more with a Lisp syntax, get more comfortable, and
+then over time use Clojure more as well.</p>
+
+<p>The following is an example macro from the Hy documentation, enabling infix
+notation in Hy, which typically uses prefix notation as is typical of a Lisp.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>sample.hy </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">infix</span> <span class="p">[</span><span class="nv">code</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">quasiquote</span> <span class="p">(</span><span class="nf">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;pre&gt;&lt;code&gt;</span><span class="p">(</span><span class="nf">unquote</span> <span class="p">(</span><span class="nb">get </span><span class="nv">code</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nf">unquote</span> <span class="p">(</span><span class="nb">get </span><span class="nv">code</span> <span class="mi">0</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nf">unquote</span> <span class="p">(</span><span class="nb">get </span><span class="nv">code</span> <span class="mi">2</span><span class="p">)))))</span>
+</span><span class='line'><span class="nv">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;=&gt;</span> <span class="p">(</span><span class="nf">infix</span> <span class="p">(</span><span class="mi">1</span> <span class="nb">+ </span><span class="mi">1</span><span class="p">))</span>
+</span><span class='line'><span class="mi">2</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

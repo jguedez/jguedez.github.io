@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vagrant | Jose Guedez]]></title>
+  <link href="http://yoursite.com/blog/categories/vagrant/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2013-12-02T22:40:23+11:00</updated>
+  <id>http://yoursite.com/</id>
+  <author>
+    <name><![CDATA[Jose Guedez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Creating custom Vagrant boxes with Veewee]]></title>
+    <link href="http://yoursite.com/blog/2013/11/05/creating-custom-vagrant-boxes-with-veewee/"/>
+    <updated>2013-11-05T16:48:18+11:00</updated>
+    <id>http://yoursite.com/blog/2013/11/05/creating-custom-vagrant-boxes-with-veewee</id>
+    <content type="html"><![CDATA[<h2>Easily build Vagrant boxes for your favourite distro&hellip;</h2>
+
+<p>I have been using <a href="http://vagrantup.com/">Vagrant</a> for a while to quickly and
+simply generate reproducible development environments. It&rsquo;s very useful and
+works great.</p>
+
+<p>Vagrant provides several different <a href="https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Boxes">official</a>
+&ldquo;base boxes&rdquo; that you can use to <a href="http://docs.vagrantup.com/v2/getting-started/index.html">get started quickly</a>.
+However, all of them are different versions of Ubuntu &ndash; 32 and 64 bits versions
+of the supported LTS editions (Precise and Lucid at the moment).</p>
+
+<p>I have been thinking about switching to Debian for my base server needs for a
+while, given all the controversy surrounding Ubuntu lately. It seems that
+Canonical is making a lot of one-sided decisions, and it is unclear what this
+strategy will mean for the future of their server offerings.
+See <a href="http://www.omgubuntu.co.uk/2013/10/ubuntu-wins-big-brother-austria-privacy-award">here</a>
+and <a href="http://www.networkworld.com/news/2013/062013-canonical-mir-271072.html">here</a>
+for some background.</p>
+
+<p>There are several distributions like Fedora or CentOS that would have been a
+good alternative as well, I have played with them in the past without issues.
+However, I am most comfortable using tools like apt, dpkg, etc. so I am coming
+back to Debian.</p>
+
+<!-- more -->
+
+
+<p>There are no official Debian Vagrant boxes though. You can definitely get some
+in various unofficial <a href="http://www.vagrantbox.es/">places</a> &ndash; but I am not very
+comfortable with using OS images from random people on the web. So it looks like
+it&rsquo;s time to roll up our sleeves and build our own, but it does not sound like a
+very productive proposition.</p>
+
+<p>Enter <a href="https://github.com/jedi4ever/veewee">Veewee</a>, a tool to repeatably and
+quickly build Vagrant boxes. It has a collection of
+<a href="https://github.com/jedi4ever/veewee/tree/master/templates">templates</a> for many
+distributions, including Debian Wheezy which I used successfully to build my
+Debian image for Virtualbox. The base template did everything that I needed, and
+Veewee would even download the basic netboot Debian image to kickstart the
+build.</p>
+
+<p>You can find the simple sequence of steps to a working Virtualbox images using
+Veewee in <a href="http://www.ducea.com/2011/08/15/building-vagrant-boxes-with-veewee/">this</a> or
+<a href="http://stacktoheap.com/blog/2013/06/19/building-a-debian-wheezy-vagrant-box-using-veewee/">this</a>
+blog post. But this is a quick summary:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>veewee vbox templates <span class="c"># list available templates</span>
+</span><span class='line'>veewee vbox define &amp;lsquo;debian-72&amp;rsquo; &amp;lsquo;Debian-7.2.0-amd64-netboot&amp;rsquo;
+</span><span class='line'>veewee vbox build &amp;lsquo;debian-72&amp;rsquo;
+</span><span class='line'>veewee vbox <span class="nb">export</span> &amp;lsquo;debian-72&amp;rsquo;
+</span><span class='line'>vagrant box add &amp;lsquo;debian-72&amp;rsquo; debian-72.box <span class="c"># add the new box to Vagrant</span>
+</span><span class='line'>vagrant init &amp;lsquo;debian-72&amp;rsquo; <span class="c"># create a new VM from the image</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

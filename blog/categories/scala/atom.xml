@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: scala | Jose Guedez]]></title>
+  <link href="http://yoursite.com/blog/categories/scala/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2013-12-02T22:40:23+11:00</updated>
+  <id>http://yoursite.com/</id>
+  <author>
+    <name><![CDATA[Jose Guedez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Principles of Reactive Programming]]></title>
+    <link href="http://yoursite.com/blog/2013/11/21/principles-of-reactive-programming/"/>
+    <updated>2013-11-21T20:55:11+11:00</updated>
+    <id>http://yoursite.com/blog/2013/11/21/principles-of-reactive-programming</id>
+    <content type="html"><![CDATA[<h2>Odersky&rsquo;s follow-up course on functional programming&hellip;</h2>
+
+<p>I was looking forward to the follow-up course to <a href="https://www.coursera.org/course/progfun">Functional Programming
+Principles in Scala</a>, by Martin
+Odersky, the creator of the <a href="http://www.scala-lang.org/">Scala</a> programming
+language. I took that course about a year ago and even though Scala is not one
+of my favourite programming languages I can safely say that it was excellent and
+I learned a lot.</p>
+
+<p>Finally it&rsquo;s here &ndash; <a href="https://www.coursera.org/course/reactive">Principles of Reactive Programming</a>,
+but it&rsquo;s somewhat different from what I expected when I completed the previous
+course.</p>
+
+<p>The course is being taught this time not just by Odersky, but also by
+<a href="http://en.wikipedia.org/wiki/Erik_Meijer_(computer_scientist)">Erik Meijer</a>
+(of C#/LINQ fame) and by Roland Kuhn, from the Akka team. The course consists of
+three sections, one for each professors &ndash; as you can imagine Odersky is teaching
+a general introduction while Meijer and Kuhn cover more specialized concepts
+like asynchronous computations and actors.</p>
+
+<!-- more -->
+
+
+<p>I have been enjoying it so far. It seems a lot of people are complaining about
+the time requirements and difficulty compared to the previous course. The
+concepts are definitely more advanced this time around (monads&hellip;), and I&rsquo;ve
+limited exposure to them &ndash; while I had some knowledge about FP in general for
+the first course (completing the &ldquo;Little Schemer&rdquo; made me familiar with
+recursion).</p>
+
+<p>I am looking forward to the section about actors (it&rsquo;s the last part), as I have
+heard a lot about it in relation to Erlang and Akka but have never actually
+played with it.</p>
+
+<p>I think I am starting to like Scala more this time around. This might also be
+the result of reading more and more about the benefits of having a type system.
+I think I am starting to get the hang of it after using mainly dynamic languages
+for a long time (Python!). I also think that being exposed to all these different
+paradigms is being beneficial and gives me a better perspective.</p>
+]]></content>
+  </entry>
+  
+</feed>

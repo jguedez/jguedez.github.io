@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: intro | Jose Guedez]]></title>
+  <link href="http://yoursite.com/blog/categories/intro/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2013-12-02T22:40:23+11:00</updated>
+  <id>http://yoursite.com/</id>
+  <author>
+    <name><![CDATA[Jose Guedez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Initial commit...]]></title>
+    <link href="http://yoursite.com/blog/2013/09/12/initial-commit/"/>
+    <updated>2013-09-12T21:01:50+10:00</updated>
+    <id>http://yoursite.com/blog/2013/09/12/initial-commit</id>
+    <content type="html"><![CDATA[<h2>yet another blog&hellip;</h2>
+
+<p>I am writing this blog essentially for myself. There are already many good and useful blogs out there, and I have no intention of competing with them (not sure if I could&hellip;)</p>
+
+<p>My main goals for this blog are simple:</p>
+
+<ul>
+<li><p>I want to be able to look back and see what I have been working on over time (and hopefully see some progress!)</p></li>
+<li><p>I will be able to reference some small &ldquo;tutorials&rdquo; that I will write for myself when I find a new useful or neat technology/hack. I already use <a href="http://evernote.com/">Evernote</a> for this and it&rsquo;s fantastic, but it does not work as well for longer content &ndash; especially if it includes code (it does not have syntax highlighting, etc.)</p></li>
+<li><p>These &ldquo;rules&rdquo; can be broken at any time&hellip; ;&ndash;)</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

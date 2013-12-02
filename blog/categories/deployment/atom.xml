@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: deployment | Jose Guedez]]></title>
+  <link href="http://yoursite.com/blog/categories/deployment/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2013-12-02T22:40:23+11:00</updated>
+  <id>http://yoursite.com/</id>
+  <author>
+    <name><![CDATA[Jose Guedez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Project provisioning and deployment with Ansible]]></title>
+    <link href="http://yoursite.com/blog/2013/10/10/project-provisioning-and-deployment-with-ansible/"/>
+    <updated>2013-10-10T18:44:30+11:00</updated>
+    <id>http://yoursite.com/blog/2013/10/10/project-provisioning-and-deployment-with-ansible</id>
+    <content type="html"><![CDATA[<h2>deployment is so easy with today&rsquo;s tools that there is simply no excuse&hellip;</h2>
+
+<p>I had been meaning to start using a real configuration management tool and
+leave my Fabric scripts behind for a while. The problem for me was that tools
+like <a href="http://puppetlabs.com/">Puppet</a> or <a href="http://www.opscode.com/chef/">Chef</a>
+seemed like overkill in most of my use cases.</p>
+
+<p>When I first learned about <a href="http://www.saltstack.com/">Salt</a>, the fact that was
+based on <strong>Python</strong> was a big plus and motivated me to give it a closer look
+but still all the overhead needed for simple projects seemed too much (I
+don&rsquo;t manage <em>thousands</em> of servers&hellip;)</p>
+
+<p>Enter <a href="http://www.ansibleworks.com/">Ansible</a> &ndash; it let&rsquo;s you automate
+everything without having to install anything on your server at the beginning &ndash;
+just <strong>SSH</strong> will do! Later as the project scales you can make your
+provisioning and deployment as complex as needed but getting started is easy.
+No big setup at all for simple projects.</p>
+
+<!-- more -->
+
+
+<p>Ansible revolves around the concept of an <strong>Inventory</strong>, that includes all the
+machines that will be managed and <strong>Playbooks</strong>, the list of states that
+describe the final state of the servers in the inventory.</p>
+
+<p>I found this <a href="http://www.stavros.io/posts/example-provisioning-and-deployment-ansible/">excellent article</a>
+about using Ansible on Django projects, even including a special setup for
+local VMs like <a href="http://www.vagrantup.com/">Vagrant</a> &ndash; it even allows for
+different virtualenv requirements.</p>
+
+<p>You basically just specify a couple of yaml files for Ansible to work with and
+you are done:</p>
+
+<ul>
+<li><strong>hosts</strong> &ndash; The inventory file for Ansible, it specifies the ip addresses,
+nicknames, groups and other server designations.</li>
+<li><strong>vars.yaml</strong> &ndash; Includes the project name, target location, packages to be
+installed, etc.</li>
+<li><strong>provision.yaml</strong> &ndash; This playbook that setups a brand new server (install
+base packages, etc.)</li>
+<li><strong>deploy.yaml</strong> &ndash; As the name implies this playbook performs the actual code
+deployment (pull code, update packages, run migrations, etc.)</li>
+<li><strong>handlers.yaml</strong> &ndash; This file specifies the actions to run if one of the
+previous playbooks makes certain changes, for example if the nginx
+configuration changes, the handler will be notified and nginx will be
+restarted.</li>
+</ul>
+
+
+<p>Just for illustration purposes I am copying here one of the yaml files from the blog
+post &ndash; <strong><em>vars.yaml</em></strong></p>
+
+<h2><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>vars.yaml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">&lt;/h2&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">&lt;p&gt;project_name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">myproject</span>
+</span><span class='line'><span class="l-Scalar-Plain">project_root</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/var/projects/myproject</span>
+</span><span class='line'><span class="l-Scalar-Plain">project_repo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">git@bitbucket.org:myuser/myproject.git</span>
+</span><span class='line'><span class="l-Scalar-Plain">system_packages</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="nl">&amp;ndash</span><span class="l-Scalar-Plain">; build-essential</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&amp;ndash; git</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&amp;ndash; libevent-dev</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&amp;ndash; nginx</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&amp;ndash; postgresql</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&amp;ndash; postgresql-server-dev-all</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&amp;ndash; python-dev</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&amp;ndash; python-setuptools</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&amp;ndash; redis-server</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&amp;ndash; postfix</span>
+</span><span class='line'><span class="l-Scalar-Plain">python_packages</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="nl">&amp;ndash</span><span class="l-Scalar-Plain">; pip</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&amp;ndash; virtualenv</span>
+</span><span class='line'><span class="l-Scalar-Plain">initfiles</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="nl">&amp;ndash</span><span class="l-Scalar-Plain">; gunicorn</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>I will stop here but there&rsquo;s more detail on the blog post and much more on
+Ansible&rsquo;s website, there are hundreds of module beyond apt, pip and friends,
+and if you don&rsquo;t find what you need you can extend the system using Python&hellip;</p>
+]]></content>
+  </entry>
+  
+</feed>

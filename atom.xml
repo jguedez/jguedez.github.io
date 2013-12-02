@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Jose Guedez]]></title>
+  <link href="http://yoursite.com/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2013-12-02T22:40:23+11:00</updated>
+  <id>http://yoursite.com/</id>
+  <author>
+    <name><![CDATA[Jose Guedez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Principles of Reactive Programming]]></title>
+    <link href="http://yoursite.com/blog/2013/11/21/principles-of-reactive-programming/"/>
+    <updated>2013-11-21T20:55:11+11:00</updated>
+    <id>http://yoursite.com/blog/2013/11/21/principles-of-reactive-programming</id>
+    <content type="html"><![CDATA[<h2>Odersky&rsquo;s follow-up course on functional programming&hellip;</h2>
+
+<p>I was looking forward to the follow-up course to <a href="https://www.coursera.org/course/progfun">Functional Programming
+Principles in Scala</a>, by Martin
+Odersky, the creator of the <a href="http://www.scala-lang.org/">Scala</a> programming
+language. I took that course about a year ago and even though Scala is not one
+of my favourite programming languages I can safely say that it was excellent and
+I learned a lot.</p>
+
+<p>Finally it&rsquo;s here &ndash; <a href="https://www.coursera.org/course/reactive">Principles of Reactive Programming</a>,
+but it&rsquo;s somewhat different from what I expected when I completed the previous
+course.</p>
+
+<p>The course is being taught this time not just by Odersky, but also by
+<a href="http://en.wikipedia.org/wiki/Erik_Meijer_(computer_scientist)">Erik Meijer</a>
+(of C#/LINQ fame) and by Roland Kuhn, from the Akka team. The course consists of
+three sections, one for each professors &ndash; as you can imagine Odersky is teaching
+a general introduction while Meijer and Kuhn cover more specialized concepts
+like asynchronous computations and actors.</p>
+
+<!-- more -->
+
+
+<p>I have been enjoying it so far. It seems a lot of people are complaining about
+the time requirements and difficulty compared to the previous course. The
+concepts are definitely more advanced this time around (monads&hellip;), and I&rsquo;ve
+limited exposure to them &ndash; while I had some knowledge about FP in general for
+the first course (completing the &ldquo;Little Schemer&rdquo; made me familiar with
+recursion).</p>
+
+<p>I am looking forward to the section about actors (it&rsquo;s the last part), as I have
+heard a lot about it in relation to Erlang and Akka but have never actually
+played with it.</p>
+
+<p>I think I am starting to like Scala more this time around. This might also be
+the result of reading more and more about the benefits of having a type system.
+I think I am starting to get the hang of it after using mainly dynamic languages
+for a long time (Python!). I also think that being exposed to all these different
+paradigms is being beneficial and gives me a better perspective.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Creating custom Vagrant boxes with Veewee]]></title>
+    <link href="http://yoursite.com/blog/2013/11/05/creating-custom-vagrant-boxes-with-veewee/"/>
+    <updated>2013-11-05T16:48:18+11:00</updated>
+    <id>http://yoursite.com/blog/2013/11/05/creating-custom-vagrant-boxes-with-veewee</id>
+    <content type="html"><![CDATA[<h2>Easily build Vagrant boxes for your favourite distro&hellip;</h2>
+
+<p>I have been using <a href="http://vagrantup.com/">Vagrant</a> for a while to quickly and
+simply generate reproducible development environments. It&rsquo;s very useful and
+works great.</p>
+
+<p>Vagrant provides several different <a href="https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Boxes">official</a>
+&ldquo;base boxes&rdquo; that you can use to <a href="http://docs.vagrantup.com/v2/getting-started/index.html">get started quickly</a>.
+However, all of them are different versions of Ubuntu &ndash; 32 and 64 bits versions
+of the supported LTS editions (Precise and Lucid at the moment).</p>
+
+<p>I have been thinking about switching to Debian for my base server needs for a
+while, given all the controversy surrounding Ubuntu lately. It seems that
+Canonical is making a lot of one-sided decisions, and it is unclear what this
+strategy will mean for the future of their server offerings.
+See <a href="http://www.omgubuntu.co.uk/2013/10/ubuntu-wins-big-brother-austria-privacy-award">here</a>
+and <a href="http://www.networkworld.com/news/2013/062013-canonical-mir-271072.html">here</a>
+for some background.</p>
+
+<p>There are several distributions like Fedora or CentOS that would have been a
+good alternative as well, I have played with them in the past without issues.
+However, I am most comfortable using tools like apt, dpkg, etc. so I am coming
+back to Debian.</p>
+
+<!-- more -->
+
+
+<p>There are no official Debian Vagrant boxes though. You can definitely get some
+in various unofficial <a href="http://www.vagrantbox.es/">places</a> &ndash; but I am not very
+comfortable with using OS images from random people on the web. So it looks like
+it&rsquo;s time to roll up our sleeves and build our own, but it does not sound like a
+very productive proposition.</p>
+
+<p>Enter <a href="https://github.com/jedi4ever/veewee">Veewee</a>, a tool to repeatably and
+quickly build Vagrant boxes. It has a collection of
+<a href="https://github.com/jedi4ever/veewee/tree/master/templates">templates</a> for many
+distributions, including Debian Wheezy which I used successfully to build my
+Debian image for Virtualbox. The base template did everything that I needed, and
+Veewee would even download the basic netboot Debian image to kickstart the
+build.</p>
+
+<p>You can find the simple sequence of steps to a working Virtualbox images using
+Veewee in <a href="http://www.ducea.com/2011/08/15/building-vagrant-boxes-with-veewee/">this</a> or
+<a href="http://stacktoheap.com/blog/2013/06/19/building-a-debian-wheezy-vagrant-box-using-veewee/">this</a>
+blog post. But this is a quick summary:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>veewee vbox templates <span class="c"># list available templates</span>
+</span><span class='line'>veewee vbox define <span class="s1">&#39;debian-72&#39;</span> <span class="s1">&#39;Debian-7.2.0-amd64-netboot&#39;</span>
+</span><span class='line'>veewee vbox build <span class="s1">&#39;debian-72&#39;</span>
+</span><span class='line'>veewee vbox <span class="nb">export</span> <span class="s1">&#39;debian-72&#39;</span>
+</span><span class='line'>vagrant box add <span class="s1">&#39;debian-72&#39;</span> debian-72.box <span class="c"># add the new box to Vagrant</span>
+</span><span class='line'>vagrant init <span class="s1">&#39;debian-72&#39;</span> <span class="c"># create a new VM from the image</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hy: Lisp syntax for Python]]></title>
+    <link href="http://yoursite.com/blog/2013/10/25/hy-lisp-syntax-for-python/"/>
+    <updated>2013-10-25T20:20:05+11:00</updated>
+    <id>http://yoursite.com/blog/2013/10/25/hy-lisp-syntax-for-python</id>
+    <content type="html"><![CDATA[<h2>You got parens in your Python&hellip;</h2>
+
+<p>Every now and then you find a project that is simply <strong>awesome</strong>. I have played
+with <a href="http://clojure.org/">Clojure</a> several times in the past and while I like
+it a lot, the <strong><em>slow</em></strong> start-up of the JVM turns me off.</p>
+
+<p>If I was doing a bigger project the startup time wouldn&rsquo;t be so bad, but I would
+like to start using the language for small stuff first while I get used to it &ndash;
+but we are talking waiting many seconds to have a working repl versus an
+immediate and powerful <a href="http://ipython.org/">IPython</a> prompt.</p>
+
+<p>Enter <a href="http://hylang.org/">Hy</a>, a Lisp that compiles directly to Python ASTs. It
+is completely transparent to invoke Python code from Python and vice versa. It&rsquo;s
+clear that it&rsquo;s heavily inspired by Clojure, and that&rsquo;s a big plus in my book
+(you even get the threading macros!). Best of all it gives you access to write
+your own macros within Python.</p>
+
+<!-- more -->
+
+
+<p>I found out about Hy from a post in <a href="https://news.ycombinator.com/item?id=6700103">Hacker News</a>,
+leading to a <a href="http://try-hy.appspot.com/">online interpreter</a> with an excellent
+presentation.</p>
+
+<p>I think Hy will let me play more with a Lisp syntax, get more comfortable, and
+then over time use Clojure more as well.</p>
+
+<p>The following is an example macro from the Hy documentation, enabling infix
+notation in Hy, which typically uses prefix notation as is typical of a Lisp.</p>
+
+<figure class='code'><figcaption><span>sample.hy </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">infix</span> <span class="p">[</span><span class="nv">code</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">quasiquote</span> <span class="p">(</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">unquote</span> <span class="p">(</span><span class="nb">get </span><span class="nv">code</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">unquote</span> <span class="p">(</span><span class="nb">get </span><span class="nv">code</span> <span class="mi">0</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">unquote</span> <span class="p">(</span><span class="nb">get </span><span class="nv">code</span> <span class="mi">2</span><span class="p">)))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">infix</span> <span class="p">(</span><span class="mi">1</span> <span class="nb">+ </span><span class="mi">1</span><span class="p">))</span>
+</span><span class='line'><span class="mi">2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Project provisioning and deployment with Ansible]]></title>
+    <link href="http://yoursite.com/blog/2013/10/10/project-provisioning-and-deployment-with-ansible/"/>
+    <updated>2013-10-10T18:44:30+11:00</updated>
+    <id>http://yoursite.com/blog/2013/10/10/project-provisioning-and-deployment-with-ansible</id>
+    <content type="html"><![CDATA[<h2>deployment is so easy with today&rsquo;s tools that there is simply no excuse&hellip;</h2>
+
+<p>I had been meaning to start using a real configuration management tool and
+leave my Fabric scripts behind for a while. The problem for me was that tools
+like <a href="http://puppetlabs.com/">Puppet</a> or <a href="http://www.opscode.com/chef/">Chef</a>
+seemed like overkill in most of my use cases.</p>
+
+<p>When I first learned about <a href="http://www.saltstack.com/">Salt</a>, the fact that was
+based on <strong>Python</strong> was a big plus and motivated me to give it a closer look
+but still all the overhead needed for simple projects seemed too much (I
+don&rsquo;t manage <em>thousands</em> of servers&hellip;)</p>
+
+<p>Enter <a href="http://www.ansibleworks.com/">Ansible</a> &ndash; it let&rsquo;s you automate
+everything without having to install anything on your server at the beginning &ndash;
+just <strong>SSH</strong> will do! Later as the project scales you can make your
+provisioning and deployment as complex as needed but getting started is easy.
+No big setup at all for simple projects.</p>
+
+<!-- more -->
+
+
+<p>Ansible revolves around the concept of an <strong>Inventory</strong>, that includes all the
+machines that will be managed and <strong>Playbooks</strong>, the list of states that
+describe the final state of the servers in the inventory.</p>
+
+<p>I found this <a href="http://www.stavros.io/posts/example-provisioning-and-deployment-ansible/">excellent article</a>
+about using Ansible on Django projects, even including a special setup for
+local VMs like <a href="http://www.vagrantup.com/">Vagrant</a> &ndash; it even allows for
+different virtualenv requirements.</p>
+
+<p>You basically just specify a couple of yaml files for Ansible to work with and
+you are done:</p>
+
+<ul>
+<li><strong>hosts</strong> &ndash; The inventory file for Ansible, it specifies the ip addresses,
+nicknames, groups and other server designations.</li>
+<li><strong>vars.yaml</strong> &ndash; Includes the project name, target location, packages to be
+installed, etc.</li>
+<li><strong>provision.yaml</strong> &ndash; This playbook that setups a brand new server (install
+base packages, etc.)</li>
+<li><strong>deploy.yaml</strong> &ndash; As the name implies this playbook performs the actual code
+deployment (pull code, update packages, run migrations, etc.)</li>
+<li><strong>handlers.yaml</strong> &ndash; This file specifies the actions to run if one of the
+previous playbooks makes certain changes, for example if the nginx
+configuration changes, the handler will be notified and nginx will be
+restarted.</li>
+</ul>
+
+
+<p>Just for illustration purposes I am copying here one of the yaml files from the blog
+post &ndash; <strong><em>vars.yaml</em></strong></p>
+
+<figure class='code'><figcaption><span>vars.yaml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="nn">---</span>
+</span><span class='line'><span class="l-Scalar-Plain">project_name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">myproject</span>
+</span><span class='line'><span class="l-Scalar-Plain">project_root</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/var/projects/myproject</span>
+</span><span class='line'><span class="l-Scalar-Plain">project_repo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">git@bitbucket.org:myuser/myproject.git</span>
+</span><span class='line'><span class="l-Scalar-Plain">system_packages</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">build-essential</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">libevent-dev</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">nginx</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql-server-dev-all</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python-dev</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python-setuptools</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">redis-server</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postfix</span>
+</span><span class='line'><span class="l-Scalar-Plain">python_packages</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pip</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">virtualenv</span>
+</span><span class='line'><span class="l-Scalar-Plain">initfiles</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gunicorn</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I will stop here but there&rsquo;s more detail on the blog post and much more on
+Ansible&rsquo;s website, there are hundreds of module beyond apt, pip and friends,
+and if you don&rsquo;t find what you need you can extend the system using Python&hellip;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Initial commit...]]></title>
+    <link href="http://yoursite.com/blog/2013/09/12/initial-commit/"/>
+    <updated>2013-09-12T21:01:50+10:00</updated>
+    <id>http://yoursite.com/blog/2013/09/12/initial-commit</id>
+    <content type="html"><![CDATA[<h2>yet another blog&hellip;</h2>
+
+<p>I am writing this blog essentially for myself. There are already many good and useful blogs out there, and I have no intention of competing with them (not sure if I could&hellip;)</p>
+
+<p>My main goals for this blog are simple:</p>
+
+<ul>
+<li><p>I want to be able to look back and see what I have been working on over time (and hopefully see some progress!)</p></li>
+<li><p>I will be able to reference some small &ldquo;tutorials&rdquo; that I will write for myself when I find a new useful or neat technology/hack. I already use <a href="http://evernote.com/">Evernote</a> for this and it&rsquo;s fantastic, but it does not work as well for longer content &ndash; especially if it includes code (it does not have syntax highlighting, etc.)</p></li>
+<li><p>These &ldquo;rules&rdquo; can be broken at any time&hellip; ;&ndash;)</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
